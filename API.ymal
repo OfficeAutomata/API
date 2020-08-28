@@ -2,7 +2,7 @@ openapi: "3.0.0"
 info:
   version: 1.0.0
   title: OfficeAutomata Server API
-  description: OfficeAutomata API that the OpenAPI 3.0 specification for export  of Tasks and Processes
+  description: OfficeAutomata API that the OpenAPI 3.0 specification for export of Tasks and Processes
   termsOfService: httpw://www.officeautomata.com/terms/
   contact:
     name: OfficeAutomata API Team

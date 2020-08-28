@@ -1,0 +1,44 @@
+{
+  "TaskID": 1,
+  "Name": "Create Invoice",
+  "Events": [
+    {
+      "WorkflowID": 0,
+      "Index": 647,
+      "UI_Element": "Six",
+      "AutoID_Control": "num6Button;button",
+      "UI_Element_Pattern": "InvokePattern;ScrollItemPattern",
+      "Pattern_Value": "",
+      "X_Path": "Desktop 1;pane/Calculator;window/Calculator;window/;group/NumberPad;group/",
+      "Type": "Clicked",
+      "Value": "6",
+      "Time": "2020-04-22T06:52:35.1530000",
+      "AppFile": "",
+      "AppFrame_1": "",
+      "User": "Jeremiah",
+      "Location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsCalculator_10.1910.0.0_x64__8wekyb3d8bbwe\\Calculator.exe",
+      "Application": "Calculator",
+      "Data": "",
+      "API": "UIAutomation"
+    },
+    {
+      "WorkflowID": 0,
+      "Index": 648,
+      "UI_Element": "Close Calculator",
+      "AutoID_Control": "Close;button",
+      "UI_Element_Pattern": "InvokePattern",
+      "Pattern_Value": "",
+      "X_Path": "Desktop 1;pane/Calculator;window/TitleBar;/",
+      "Type": "Clicked",
+      "Value": "Close",
+      "Time": "2020-04-22T06:52:38.2630000",
+      "AppFile": "Calculator",
+      "AppFrame_1": "",
+      "User": "Jeremiah",
+      "Location": "C:\\WINDOWS\\system32\\ApplicationFrameHost.exe",
+      "Application": "Calculator",
+      "Data": "",
+      "API": "UIAutomation"
+    }
+  ]
+} 

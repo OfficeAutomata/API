@@ -1,0 +1,12 @@
+{
+  "Processes": [
+    {
+      "ProcessID": 1,
+      "Name": "Invoice Create"
+    },
+    {
+      "ProcessID": 2,
+      "Name": "Invoice Approval"
+    }
+  ]
+} 
