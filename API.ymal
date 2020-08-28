@@ -14,17 +14,21 @@ info:
 servers:
   - url: https://www.officeautomata.com/api
 paths:
-  /task/{taskId}:
+  /task/all:
     get:
-      summary: Get all events for a task
-      operationId: returnTask
+      summary: Get all tasks id and names
+      operationId: returnAllTasks
       tags:
         - task
       parameters:
-        - name: taskId
+        - name: license id
           in: path
           required: true
-          description: The id of the task to retrieve
+          description: The client license number
+          schema:
+            type: string
+		- name: license
+          in: query
           schema:
             type: string
       responses:
@@ -33,16 +37,49 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/task"
+                $ref: "#/schemas/alltasks"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/schemas/Error"
+  /task/select:
+    get:
+      summary: Get all events for a task
+      operationId: returnTask
+      tags:
+        - task
+      parameters:
+        - name: taskId
+          in: query
+          required: true
+          description: The id of the task to retrieve
+          schema:
+            type: int32
+		- name: license
+          in: query
+		  required: true
+		  description: The client license number
+		  default: demo
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/schemas/task"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/schemas/Error"
 components:
   schemas:
-    Event:
+    Task:
       type: object
       required:
         - id
@@ -50,15 +87,13 @@ components:
       properties:
         id:
           type: integer
-          format: int64
+          format: int32
         name:
           type: string
-        tag:
-          type: string
-    Task:
+    Event:
       type: array
       items:
-        $ref: "#/components/schemas/Pet"
+        $ref: "#/schemas/event"
     Error:
       type: object
       required:
