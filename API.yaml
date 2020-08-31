@@ -1,0 +1,210 @@
+﻿openapi: 3.0.0
+servers:
+  - url: 'http://www.officeautomata.com/api'
+info:
+  description: >-
+    OfficeAutomata API that the OpenAPI 3.0 specification for export of Tasks
+    and Processes
+  version: 1.0.0
+  title: OfficeAutomata Server API
+  termsOfService: 'httpw://www.officeautomata.com/terms/'
+  contact:
+    email: support@officeautomata.com
+    url: 'https://www.officeautomata.com'
+    name: OfficeAutomata API Team
+  license:
+    name: Apache-2.0
+    url: 'https://opensource.org/licenses/Apache-2.0'
+tags:
+  - name: Event
+    description: Everything about Events
+  - name: Task
+    description: Everything about Tasks
+  - name: Processes
+    description: Everything about Processes in BPMN 2.0
+paths:
+  /tasks/all:
+    get:
+      tags:
+        - Task
+      summary: Get all Tasks
+      description: Get all Task Names and Task IDs
+      operationId: getAllTasks
+      parameters:
+        - name: License ID
+          in: query
+          required: true
+          schema:
+            type: string
+            default: demo
+          description: The client license number
+      responses:
+        '200':
+          description: pet response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tasks'
+        '400':
+          description: Invalid License
+      security:
+        - License Key: []
+  /tasks/select:
+    get:
+      tags:
+        - Task
+        - Event
+      summary: Find Task by ID
+      description: 'Returns a Task with Id, Name, and Events array'
+      operationId: getTaskById
+      parameters:
+        - name: License ID
+          in: query
+          required: true
+          schema:
+            type: string
+            default: demo
+        - name: Task ID
+          in: query
+          required: true
+          schema:
+            type: number
+            default: ''
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskSummary'
+        '400':
+          description: Invalid License
+        '404':
+          description: Task not found
+      security:
+        - License Key: []
+  /process/all:
+    get:
+      tags:
+        - pr
+      summary: Get all Processes
+      description: Get all Process Names and Process IDs
+      operationId: getAllProcesses
+      parameters:
+        - name: License ID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Processes'
+        '400':
+          description: Invalid License
+      security:
+        - License Key: []
+      deprecated: true
+externalDocs:
+  description: See OfficeAutomataAPI example
+  url: 'https://github.com/OfficeAutomata/API'
+components:
+  schemas:
+    Process:
+      required:
+        - Name
+        - ID
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32  
+    
+    Processes:
+      type: array
+      items:
+        type: '#/components/schemas/Process'
+
+    Task:
+      required:
+        - Name
+        - ID
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32  
+
+    Tasks:
+      type: array
+      items:
+        type: '#/components/schemas/Task'
+
+    Event:
+      properties:
+        WorkflowID: 
+          type: integer
+          format: int32 
+        Index: 
+          type: integer
+          format: int32 
+        UI_Element:
+          type: string
+        AutoID_Control: 
+          type: string
+        UI_Element_Pattern: 
+          type: string
+        Pattern_Value: 
+          type: string
+        X_Path: 
+          type: string
+        Type: 
+          type: string
+        Value: 
+          type: string
+        Time: 
+          type: string
+        AppFile: 
+          type: string
+        AppFrame_1: 
+          type: string
+        Location: 
+          type: string
+        Application: 
+          type: string
+        Data: 
+          type: string
+        API: 
+          type: string
+
+    TaskSummary:
+      required:
+        - Name
+        - ID
+        - Events
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32  
+        Events:
+          type: array
+          items:
+            type: '#/components/schemas/Event'
+
+  securitySchemes:
+    License Key:
+      type: apiKey
+      in: query
+      name: 'License '
+  links: {}
+  callbacks: {}
+security:
+  - api_key: []
+  - License Key: []

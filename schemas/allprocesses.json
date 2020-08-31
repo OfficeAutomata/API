@@ -1,5 +1,5 @@
 {
-  "Processes": [
+  [
     {
       "ProcessID": 1,
       "Name": "Invoice Create"
