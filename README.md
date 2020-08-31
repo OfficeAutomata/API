@@ -20,4 +20,4 @@ If you find something missing or incorrect please [open an issue](https://github
 
 ## License
 
-This software is published under the Apache License. For more information, see the LICENSE file.
+This software is published under the GPL-3.0 License. For more information, see the LICENSE file.
