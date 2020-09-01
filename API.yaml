@@ -13,8 +13,8 @@ info:
     url: 'https://www.officeautomata.com'
     name: OfficeAutomata API Team
   license:
-    name: Apache-2.0
-    url: 'https://opensource.org/licenses/Apache-2.0'
+    name: GPL-3.0 License
+    url: 'https://www.gnu.org/licenses/gpl-3.0.txt'
 tags:
   - name: Event
     description: Everything about Events
