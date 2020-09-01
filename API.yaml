@@ -23,7 +23,7 @@ tags:
   - name: Processes
     description: Everything about Processes in BPMN 2.0
 paths:
-  /tasks/all:
+  /task/all:
     get:
       tags:
         - Task
@@ -31,7 +31,7 @@ paths:
       description: Get all Task Names and Task IDs
       operationId: getAllTasks
       parameters:
-        - name: License ID
+        - name: LicenseID
           in: query
           required: true
           schema:
@@ -48,8 +48,8 @@ paths:
         '400':
           description: Invalid License
       security:
-        - License Key: []
-  /tasks/select:
+        - api_key: []
+  /task/select:
     get:
       tags:
         - Task
@@ -58,18 +58,19 @@ paths:
       description: 'Returns a Task with Id, Name, and Events array'
       operationId: getTaskById
       parameters:
-        - name: License ID
+        - name: LicenseID
           in: query
           required: true
           schema:
             type: string
             default: demo
-        - name: Task ID
+          description: The client license number
+        - name: TaskID
           in: query
           required: true
           schema:
-            type: number
-            default: ''
+            type: integer
+            format: int32
       responses:
         '200':
           description: successful operation
@@ -82,20 +83,22 @@ paths:
         '404':
           description: Task not found
       security:
-        - License Key: []
+        - api_key: []
   /process/all:
     get:
       tags:
-        - pr
+        - Process
       summary: Get all Processes
       description: Get all Process Names and Process IDs
       operationId: getAllProcesses
       parameters:
-        - name: License ID
+        - name: LicenseID
           in: query
           required: true
           schema:
             type: string
+            default: demo
+          description: The client license number
       responses:
         '200':
           description: successful operation
@@ -106,8 +109,7 @@ paths:
         '400':
           description: Invalid License
       security:
-        - License Key: []
-      deprecated: true
+        - api_key: []
 externalDocs:
   description: See OfficeAutomataAPI example
   url: 'https://github.com/OfficeAutomata/API'
@@ -127,7 +129,7 @@ components:
     Processes:
       type: array
       items:
-        type: '#/components/schemas/Process'
+        $ref: '#/components/schemas/Process'
 
     Task:
       required:
@@ -143,7 +145,7 @@ components:
     Tasks:
       type: array
       items:
-        type: '#/components/schemas/Task'
+        $ref: '#/components/schemas/Task'
 
     Event:
       properties:
@@ -196,15 +198,14 @@ components:
         Events:
           type: array
           items:
-            type: '#/components/schemas/Event'
+            $ref: '#/components/schemas/Event'
 
   securitySchemes:
-    License Key:
+    api_key:
       type: apiKey
       in: query
-      name: 'License '
+      name: 'License'
   links: {}
   callbacks: {}
 security:
   - api_key: []
-  - License Key: []
