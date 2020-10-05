@@ -110,6 +110,41 @@ paths:
           description: Invalid License
       security:
         - api_key: []
+  /process/select:
+    get:
+      tags:
+        - Process
+        - Task
+      summary: Find Process by ID
+      description: 'Returns a BPMN 2.0 xml'
+      operationId: getProcessById
+      parameters:
+        - name: LicenseID
+          in: query
+          required: true
+          schema:
+            type: string
+            default: demo
+          description: The client license number
+        - name: ProcessID
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessSummary'
+        '400':
+          description: Invalid License
+        '404':
+          description: Task not found
+      security:
+        - api_key: []
 externalDocs:
   description: See OfficeAutomataAPI example
   url: 'https://github.com/OfficeAutomata/API'
@@ -199,6 +234,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Event'
+
+    ProcessSummary:
+      required:
+        - Name
+        - ID
+        - BPMN
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32  
+        BPMN:
+          type: string
 
   securitySchemes:
     api_key:
